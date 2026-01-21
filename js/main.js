@@ -187,43 +187,6 @@ class ScrollAnimations {
 }
 
 // ===================================
-// Skills Progress Bars Animation
-// ===================================
-
-class SkillsAnimation {
-    constructor() {
-        this.skillBars = document.querySelectorAll('.skill-progress');
-        this.animated = false;
-        this.init();
-    }
-    
-    init() {
-        window.addEventListener('scroll', debounce(() => this.animateSkills(), 50));
-        this.animateSkills(); // Check on load
-    }
-    
-    animateSkills() {
-        if (this.animated) return;
-        
-        const skillsSection = document.getElementById('skills');
-        if (!skillsSection) return;
-        
-        const rect = skillsSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        if (rect.top <= windowHeight * 0.75) {
-            this.animated = true;
-            
-            this.skillBars.forEach(bar => {
-                const progress = bar.getAttribute('data-progress');
-                setTimeout(() => {
-                    bar.style.width = progress + '%';
-                }, 100);
-            });
-        }
-    }
-}
-
 // ===================================
 // Contact Form Handling
 // ===================================
@@ -451,7 +414,6 @@ function init() {
     // Initialize all components
     new Navigation();
     new ScrollAnimations();
-    new SkillsAnimation();
     new ContactForm();
     new BackToTop();
     
@@ -517,7 +479,6 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         Navigation,
         ScrollAnimations,
-        SkillsAnimation,
         ContactForm,
         BackToTop,
         TypeWriter
