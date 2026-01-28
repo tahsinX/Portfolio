@@ -187,89 +187,40 @@ class ScrollAnimations {
 }
 
 // ===================================
-// ===================================
-// Contact Form Handling
+// Skills Progress Bars Animation
 // ===================================
 
-class ContactForm {
+class SkillsAnimation {
     constructor() {
-        this.form = document.getElementById('contactForm');
-        this.formStatus = document.getElementById('formStatus');
+        this.skillBars = document.querySelectorAll('.skill-progress');
+        this.animated = false;
         this.init();
     }
     
     init() {
-        if (this.form) {
-            this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-        }
+        window.addEventListener('scroll', debounce(() => this.animateSkills(), 50));
+        this.animateSkills(); // Check on load
     }
     
-    async handleSubmit(e) {
-        e.preventDefault();
+    animateSkills() {
+        if (this.animated) return;
         
-        const formData = new FormData(this.form);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
+        const skillsSection = document.getElementById('skills');
+        if (!skillsSection) return;
         
-        // Validate
-        if (!this.validateForm(data)) {
-            this.showStatus('Please fill in all fields correctly.', 'error');
-            return;
-        }
+        const rect = skillsSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         
-        // Show loading state
-        const submitBtn = this.form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        submitBtn.disabled = true;
-        
-        // Simulate form submission (replace with actual API call)
-        try {
-            // In production, send to your backend or email service
-            await this.simulateFormSubmission(data);
+        if (rect.top <= windowHeight * 0.75) {
+            this.animated = true;
             
-            this.showStatus('Message sent successfully! I\'ll get back to you soon.', 'success');
-            this.form.reset();
-        } catch (error) {
-            this.showStatus('Something went wrong. Please try again or email me directly.', 'error');
-        } finally {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
+            this.skillBars.forEach(bar => {
+                const progress = bar.getAttribute('data-progress');
+                setTimeout(() => {
+                    bar.style.width = progress + '%';
+                }, 100);
+            });
         }
-    }
-    
-    validateForm(data) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        return (
-            data.name.trim().length >= 2 &&
-            emailRegex.test(data.email) &&
-            data.subject.trim().length >= 3 &&
-            data.message.trim().length >= 10
-        );
-    }
-    
-    showStatus(message, type) {
-        this.formStatus.textContent = message;
-        this.formStatus.className = `form-status ${type}`;
-        
-        setTimeout(() => {
-            this.formStatus.className = 'form-status';
-        }, 5000);
-    }
-    
-    simulateFormSubmission(data) {
-        return new Promise((resolve) => {
-            // Log form data (remove in production)
-            console.log('Form submitted:', data);
-            
-            // Simulate network delay
-            setTimeout(resolve, 1500);
-        });
     }
 }
 
@@ -405,6 +356,79 @@ function initLazyLoading() {
 }
 
 // ===================================
+// Contact Form Handler
+// ===================================
+
+class ContactForm {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.statusDiv = document.getElementById('formStatus');
+        this.submitBtn = document.getElementById('submitBtn');
+        
+        if (this.form) {
+            this.init();
+        }
+    }
+    
+    init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+    
+    async handleSubmit(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim()
+        };
+        
+        // Disable button during submission
+        this.submitBtn.disabled = true;
+        this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok && result.success) {
+                this.showStatus('✅ Message sent successfully! Check your email for confirmation.', 'success');
+                this.form.reset();
+            } else {
+                this.showStatus('❌ ' + (result.error || 'Failed to send message'), 'error');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            this.showStatus('❌ Connection error. Is the server running? (npm start)', 'error');
+        } finally {
+            this.submitBtn.disabled = false;
+            this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
+    }
+    
+    showStatus(message, type) {
+        this.statusDiv.textContent = message;
+        this.statusDiv.className = `form-status ${type} visible`;
+        
+        // Auto-hide success message after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                this.statusDiv.classList.remove('visible');
+            }, 5000);
+        }
+    }
+}
+
+// ===================================
 // Initialize Everything
 // ===================================
 
@@ -414,8 +438,9 @@ function init() {
     // Initialize all components
     new Navigation();
     new ScrollAnimations();
-    new ContactForm();
+    new SkillsAnimation();
     new BackToTop();
+    new ContactForm();
     
     // Initialize smooth scrolling
     initSmoothScroll();
@@ -479,7 +504,7 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         Navigation,
         ScrollAnimations,
-        ContactForm,
+        SkillsAnimation,
         BackToTop,
         TypeWriter
     };
