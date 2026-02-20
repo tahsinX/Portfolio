@@ -371,48 +371,13 @@ class ContactForm {
     }
     
     init() {
+        // Formspree handles submission, but we can add success handling if needed
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
     
-    async handleSubmit(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            subject: document.getElementById('subject').value.trim(),
-            message: document.getElementById('message').value.trim()
-        };
-        
-        // Disable button during submission
-        this.submitBtn.disabled = true;
-        this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
-        try {
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            const result = await response.json();
-            
-            if (response.ok && result.success) {
-                this.showStatus('✅ Message sent successfully! Check your email for confirmation.', 'success');
-                this.form.reset();
-            } else {
-                this.showStatus('❌ ' + (result.error || 'Failed to send message'), 'error');
-            }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            this.showStatus('❌ Connection error. Is the server running? (npm start)', 'error');
-        } finally {
-            this.submitBtn.disabled = false;
-            this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-        }
+    handleSubmit(e) {
+        // Optional: Add custom handling for Formspree success/error
+        // For now, let Formspree handle it natively
     }
     
     showStatus(message, type) {
