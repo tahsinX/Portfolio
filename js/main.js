@@ -1,476 +1,431 @@
 /**
- * Main JavaScript File
- * Handles navigation, scroll effects, form validation, and animations
+ * Portfolio Main JavaScript
+ * Author: Ibnul Tahsin Rihan
+ * Features:
+ *  - Persistent Light/Dark Theme Switcher (with system preference fallback)
+ *  - Responsive Mobile Navigation Drawer with Overlay & Scroll Locking
+ *  - IntersectionObserver Active Section Highlighting
+ *  - Smooth Scrolling with Navbar Offset
+ *  - Scroll Reveal Micro-Animations (IntersectionObserver)
+ *  - Robust Client-Side Form Validation & Formspree Submission Handling
+ *  - Back-to-Top Floating Action Button
  */
 
-// ===================================
-// Utility Functions
-// ===================================
+'use strict';
 
-/**
- * Debounce function to limit how often a function is called
- */
-function debounce(func, wait = 10) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// ==========================================================================
+// 1. Theme Switcher Controller
+// ==========================================================================
+class ThemeManager {
+    constructor() {
+        this.toggleBtn = document.getElementById('themeToggle');
+        this.htmlElement = document.documentElement;
+
+        this.init();
+    }
+
+    init() {
+        // Clear any old stored preference so the website always starts in dark mode
+        try {
+            localStorage.removeItem('portfolio-theme');
+            localStorage.removeItem('portfolio_theme_mode');
+        } catch (e) {}
+
+        // Set website initially to dark mode
+        this.setTheme('dark');
+
+        // Allow user to switch to light mode and back
+        if (this.toggleBtn) {
+            this.toggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
+    }
+
+    setTheme(theme) {
+        this.htmlElement.setAttribute('data-theme', theme);
+        const isDark = theme === 'dark';
+
+        if (this.toggleBtn) {
+            this.toggleBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            this.toggleBtn.setAttribute(
+                'aria-label',
+                isDark ? 'Switch to light mode' : 'Switch to dark mode'
+            );
+        }
+    }
+
+    toggleTheme() {
+        const currentTheme = this.htmlElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
+    }
 }
 
-/**
- * Check if element is in viewport
- */
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// ===================================
-// Navigation Functionality
-// ===================================
-
-class Navigation {
+// ==========================================================================
+// 2. Navigation & Mobile Drawer Controller
+// ==========================================================================
+class NavigationManager {
     constructor() {
         this.navbar = document.getElementById('navbar');
         this.navToggle = document.getElementById('navToggle');
         this.navMenu = document.getElementById('navMenu');
+        this.navBackdrop = document.getElementById('navBackdrop');
         this.navLinks = document.querySelectorAll('.nav-link');
-        
+        this.sections = document.querySelectorAll('section[id]');
+
+        this.isOpen = false;
         this.init();
     }
-    
+
     init() {
-        // Scroll event for navbar style
-        window.addEventListener('scroll', debounce(() => this.handleScroll()));
-        
-        // Mobile menu toggle
+        // Hamburger click
         if (this.navToggle) {
-            this.navToggle.addEventListener('click', () => this.toggleMobileMenu());
+            this.navToggle.addEventListener('click', () => this.toggleMenu());
         }
-        
-        // Close mobile menu when clicking on a link
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', (e) => this.handleNavLinkClick(e));
+
+        // Backdrop click
+        if (this.navBackdrop) {
+            this.navBackdrop.addEventListener('click', () => this.closeMenu());
+        }
+
+        // Smooth scroll & close menu when clicking links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (e) => this.handleAnchorClick(e));
         });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => this.handleOutsideClick(e));
-        
-        // Update active link on scroll
-        window.addEventListener('scroll', debounce(() => this.updateActiveLink(), 100));
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.closeMenu();
+            }
+        });
+
+        // Scroll listener for active link & navbar shadow
+        window.addEventListener('scroll', () => {
+            this.handleScroll();
+        }, { passive: true });
+
+        this.initActiveSectionObserver();
     }
-    
+
+    toggleMenu() {
+        if (this.isOpen) {
+            this.closeMenu();
+        } else {
+            this.openMenu();
+        }
+    }
+
+    openMenu() {
+        this.isOpen = true;
+        this.navMenu?.classList.add('active');
+        this.navToggle?.classList.add('active');
+        this.navToggle?.setAttribute('aria-expanded', 'true');
+        this.navBackdrop?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeMenu() {
+        this.isOpen = false;
+        this.navMenu?.classList.remove('active');
+        this.navToggle?.classList.remove('active');
+        this.navToggle?.setAttribute('aria-expanded', 'false');
+        this.navBackdrop?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    handleAnchorClick(e) {
+        const href = e.currentTarget.getAttribute('href');
+        if (!href || !href.startsWith('#') || href === '#') return;
+
+        const targetEl = document.querySelector(href);
+        if (!targetEl) return;
+
+        e.preventDefault();
+        this.closeMenu();
+
+        const navHeight = this.navbar?.offsetHeight || 72;
+        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - navHeight;
+
+        window.scrollTo({
+            top: Math.max(0, targetPos),
+            behavior: 'smooth'
+        });
+    }
+
     handleScroll() {
-        if (window.scrollY > 50) {
+        if (!this.navbar) return;
+        if (window.scrollY > 30) {
             this.navbar.classList.add('scrolled');
         } else {
             this.navbar.classList.remove('scrolled');
         }
     }
-    
-    toggleMobileMenu() {
-        this.navMenu.classList.toggle('active');
-        this.navToggle.classList.toggle('active');
-    }
-    
-    handleNavLinkClick(e) {
-        e.preventDefault();
-        const targetId = e.currentTarget.getAttribute('href');
-        
-        // Close mobile menu
-        this.navMenu.classList.remove('active');
-        this.navToggle.classList.remove('active');
-        
-        // Smooth scroll to section
-        if (targetId.startsWith('#')) {
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                const navHeight = this.navbar.offsetHeight;
-                const targetPosition = targetSection.offsetTop - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-    }
-    
-    handleOutsideClick(e) {
-        if (!this.navMenu.contains(e.target) && 
-            !this.navToggle.contains(e.target) && 
-            this.navMenu.classList.contains('active')) {
-            this.navMenu.classList.remove('active');
-            this.navToggle.classList.remove('active');
-        }
-    }
-    
-    updateActiveLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                this.navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
+
+    initActiveSectionObserver() {
+        if (!('IntersectionObserver' in window)) return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    this.navLinks.forEach((link) => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        this.sections.forEach((sec) => observer.observe(sec));
     }
 }
 
-// ===================================
-// Scroll Animations
-// ===================================
-
-class ScrollAnimations {
+// ==========================================================================
+// 3. Scroll Reveal Animations (IntersectionObserver)
+// ==========================================================================
+class ScrollAnimator {
     constructor() {
-        this.animatedElements = [];
         this.init();
     }
-    
+
     init() {
-        // Add fade-in class to elements that should animate
-        const elementsToAnimate = [
-            '.skill-category',
+        const targets = [
+            '.about-bio',
+            '.feature-card',
+            '.experience-card',
+            '.skill-group',
             '.project-card',
-            '.timeline-item',
+            '.timeline-entry',
             '.activity-card',
-            '.contact-card'
+            '.contact-channel-card',
+            '.contact-form-panel'
         ];
-        
-        elementsToAnimate.forEach(selector => {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(el => {
-                el.classList.add('fade-in');
-                this.animatedElements.push(el);
+
+        const elements = document.querySelectorAll(targets.join(', '));
+        if (!elements.length) return;
+
+        elements.forEach((el) => el.classList.add('fade-up'));
+
+        if (!('IntersectionObserver' in window)) {
+            elements.forEach((el) => el.classList.add('in-view'));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    obs.unobserve(entry.target);
+                }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
         });
-        
-        // Check on scroll
-        window.addEventListener('scroll', debounce(() => this.checkElements(), 50));
-        
-        // Check on load
-        this.checkElements();
-    }
-    
-    checkElements() {
-        this.animatedElements.forEach(element => {
-            if (this.isElementInViewport(element)) {
-                element.classList.add('visible');
-            }
-        });
-    }
-    
-    isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        return rect.top <= windowHeight * 0.85;
+
+        elements.forEach((el) => observer.observe(el));
     }
 }
 
-// ===================================
-// Skills Progress Bars Animation
-// ===================================
-
-class SkillsAnimation {
-    constructor() {
-        this.skillBars = document.querySelectorAll('.skill-progress');
-        this.animated = false;
-        this.init();
-    }
-    
-    init() {
-        window.addEventListener('scroll', debounce(() => this.animateSkills(), 50));
-        this.animateSkills(); // Check on load
-    }
-    
-    animateSkills() {
-        if (this.animated) return;
-        
-        const skillsSection = document.getElementById('skills');
-        if (!skillsSection) return;
-        
-        const rect = skillsSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        if (rect.top <= windowHeight * 0.75) {
-            this.animated = true;
-            
-            this.skillBars.forEach(bar => {
-                const progress = bar.getAttribute('data-progress');
-                setTimeout(() => {
-                    bar.style.width = progress + '%';
-                }, 100);
-            });
-        }
-    }
-}
-
-// ===================================
-// Back to Top Button
-// ===================================
-
-class BackToTop {
-    constructor() {
-        this.button = document.getElementById('backToTop');
-        this.init();
-    }
-    
-    init() {
-        if (!this.button) return;
-        
-        window.addEventListener('scroll', debounce(() => this.toggleVisibility(), 100));
-        this.button.addEventListener('click', () => this.scrollToTop());
-    }
-    
-    toggleVisibility() {
-        if (window.scrollY > 300) {
-            this.button.classList.add('visible');
-        } else {
-            this.button.classList.remove('visible');
-        }
-    }
-    
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-}
-
-// ===================================
-// Smooth Scroll for All Links
-// ===================================
-
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            
-            if (targetId === '#' || targetId === '') return;
-            
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                e.preventDefault();
-                
-                const navbar = document.getElementById('navbar');
-                const navHeight = navbar ? navbar.offsetHeight : 0;
-                const targetPosition = targetElement.offsetTop - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// ===================================
-// Type Writer Effect (Optional Enhancement)
-// ===================================
-
-class TypeWriter {
-    constructor(element, words, period = 2000) {
-        this.element = element;
-        this.words = words;
-        this.period = period;
-        this.text = '';
-        this.wordIndex = 0;
-        this.isDeleting = false;
-        this.init();
-    }
-    
-    init() {
-        this.type();
-    }
-    
-    type() {
-        const currentWord = this.words[this.wordIndex];
-        
-        if (this.isDeleting) {
-            this.text = currentWord.substring(0, this.text.length - 1);
-        } else {
-            this.text = currentWord.substring(0, this.text.length + 1);
-        }
-        
-        this.element.textContent = this.text;
-        
-        let typeSpeed = this.isDeleting ? 50 : 100;
-        
-        if (!this.isDeleting && this.text === currentWord) {
-            typeSpeed = this.period;
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.text === '') {
-            this.isDeleting = false;
-            this.wordIndex = (this.wordIndex + 1) % this.words.length;
-            typeSpeed = 500;
-        }
-        
-        setTimeout(() => this.type(), typeSpeed);
-    }
-}
-
-// ===================================
-// Performance Optimization
-// ===================================
-
-/**
- * Lazy load images when they come into view
- */
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// ===================================
-// Contact Form Handler
-// ===================================
-
-class ContactForm {
+// ==========================================================================
+// 4. Contact Form Validation & Formspree Submission
+// ==========================================================================
+class ContactFormHandler {
     constructor() {
         this.form = document.getElementById('contactForm');
-        this.statusDiv = document.getElementById('formStatus');
+        if (!this.form) return;
+
+        this.nameInput = document.getElementById('name');
+        this.emailInput = document.getElementById('email');
+        this.subjectInput = document.getElementById('subject');
+        this.messageInput = document.getElementById('message');
         this.submitBtn = document.getElementById('submitBtn');
-        
-        if (this.form) {
-            this.init();
-        }
+        this.statusBox = document.getElementById('formStatus');
+
+        this.init();
     }
-    
+
     init() {
-        // Formspree handles submission, but we can add success handling if needed
+        // Real-time blur validation
+        [this.nameInput, this.emailInput, this.subjectInput, this.messageInput].forEach((input) => {
+            if (!input) return;
+            input.addEventListener('blur', () => this.validateField(input));
+            input.addEventListener('input', () => {
+                if (input.classList.contains('input-error')) {
+                    this.validateField(input);
+                }
+            });
+        });
+
+        // Form submit handler
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
-    
-    handleSubmit(e) {
-        // Optional: Add custom handling for Formspree success/error
-        // For now, let Formspree handle it natively
+
+    validateField(field) {
+        const value = field.value.trim();
+        const errorEl = document.getElementById(`${field.id}Error`);
+        let isValid = true;
+        let errorMessage = '';
+
+        if (field.id === 'name') {
+            if (!value) {
+                isValid = false;
+                errorMessage = 'Please enter your name.';
+            } else if (value.length < 2) {
+                isValid = false;
+                errorMessage = 'Name must be at least 2 characters.';
+            }
+        } else if (field.id === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!value) {
+                isValid = false;
+                errorMessage = 'Please enter your email address.';
+            } else if (!emailRegex.test(value)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid email address.';
+            }
+        } else if (field.id === 'subject') {
+            if (!value) {
+                isValid = false;
+                errorMessage = 'Please provide a subject.';
+            } else if (value.length < 3) {
+                isValid = false;
+                errorMessage = 'Subject must be at least 3 characters.';
+            }
+        } else if (field.id === 'message') {
+            if (!value) {
+                isValid = false;
+                errorMessage = 'Please enter your message.';
+            } else if (value.length < 10) {
+                isValid = false;
+                errorMessage = 'Message must be at least 10 characters long.';
+            }
+        }
+
+        if (!isValid) {
+            field.classList.add('input-error');
+            field.classList.remove('input-success');
+            if (errorEl) errorEl.textContent = errorMessage;
+        } else {
+            field.classList.remove('input-error');
+            field.classList.add('input-success');
+            if (errorEl) errorEl.textContent = '';
+        }
+
+        return isValid;
     }
-    
-    showStatus(message, type) {
-        this.statusDiv.textContent = message;
-        this.statusDiv.className = `form-status ${type} visible`;
-        
-        // Auto-hide success message after 5 seconds
-        if (type === 'success') {
-            setTimeout(() => {
-                this.statusDiv.classList.remove('visible');
-            }, 5000);
+
+    validateAll() {
+        const isNameValid = this.validateField(this.nameInput);
+        const isEmailValid = this.validateField(this.emailInput);
+        const isSubjectValid = this.validateField(this.subjectInput);
+        const isMessageValid = this.validateField(this.messageInput);
+        return isNameValid && isEmailValid && isSubjectValid && isMessageValid;
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+
+        if (!this.validateAll()) {
+            return;
+        }
+
+        // Set pending UI state
+        const originalBtnText = this.submitBtn.innerHTML;
+        this.submitBtn.disabled = true;
+        this.submitBtn.innerHTML = `
+            <i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i>
+            <span>Sending Message...</span>
+        `;
+        this.hideStatus();
+
+        try {
+            const formData = new FormData(this.form);
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                this.showStatus('success', 'Thank you! Your message has been sent successfully. I will get back to you shortly.');
+                this.form.reset();
+                [this.nameInput, this.emailInput, this.subjectInput, this.messageInput].forEach((input) => {
+                    input?.classList.remove('input-success', 'input-error');
+                });
+            } else {
+                const data = await response.json().catch(() => ({}));
+                const msg = data.errors ? data.errors.map(err => err.message).join(', ') : 'Oops! Something went wrong submitting the form.';
+                this.showStatus('error', msg);
+            }
+        } catch (err) {
+            this.showStatus('error', 'Unable to send message right now. Please email me directly at ibnultahsinrihan@gmail.com.');
+        } finally {
+            this.submitBtn.disabled = false;
+            this.submitBtn.innerHTML = originalBtnText;
         }
     }
-}
 
-// ===================================
-// Initialize Everything
-// ===================================
-
-function init() {
-    console.log('Portfolio initialized successfully! 🚀');
-    
-    // Initialize all components
-    new Navigation();
-    new ScrollAnimations();
-    new SkillsAnimation();
-    new BackToTop();
-    new ContactForm();
-    
-    // Initialize smooth scrolling
-    initSmoothScroll();
-    
-    // Initialize lazy loading (if needed)
-    initLazyLoading();
-    
-    // Optional: Add typewriter effect to hero subtitle
-    // Uncomment to enable
-    /*
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        const words = ['Frontend Developer', 'UI Implementer', 'MERN Stack Enthusiast'];
-        new TypeWriter(heroSubtitle, words, 3000);
+    showStatus(type, message) {
+        if (!this.statusBox) return;
+        this.statusBox.textContent = message;
+        this.statusBox.className = `form-status ${type}`;
     }
-    */
-}
 
-// ===================================
-// Run on DOM Ready
-// ===================================
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
-
-// ===================================
-// Handle Page Visibility Changes
-// ===================================
-
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        document.title = 'Come back soon! 👋';
-    } else {
-        document.title = 'Ibnul Tahsin Rihan | Frontend Developer';
+    hideStatus() {
+        if (!this.statusBox) return;
+        this.statusBox.className = 'form-status';
+        this.statusBox.textContent = '';
     }
-});
-
-// ===================================
-// Prevent FOUC (Flash of Unstyled Content)
-// ===================================
-
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-// ===================================
-// Handle External Links
-// ===================================
-
-document.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A' && e.target.hostname !== window.location.hostname) {
-        e.target.setAttribute('rel', 'noopener noreferrer');
-    }
-});
-
-// Export for module usage (if needed)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        Navigation,
-        ScrollAnimations,
-        SkillsAnimation,
-        BackToTop,
-        TypeWriter
-    };
 }
+
+// ==========================================================================
+// 5. Back to Top Button Controller
+// ==========================================================================
+class BackToTopManager {
+    constructor() {
+        this.button = document.getElementById('backToTop');
+        if (!this.button) return;
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                this.button.classList.add('visible');
+            } else {
+                this.button.classList.remove('visible');
+            }
+        }, { passive: true });
+
+        this.button.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// ==========================================================================
+// 6. Application Bootstrap
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    new ThemeManager();
+    new NavigationManager();
+    new ScrollAnimator();
+    new ContactFormHandler();
+    new BackToTopManager();
+    console.log('Portfolio application loaded successfully. Theme & interactions initialized.');
+});

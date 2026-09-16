@@ -1,563 +1,807 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ibnul Tahsin Rihan - Computer Science & Engineering Student | Frontend Web Developer | MERN Stack Enthusiast">
-    <meta name="keywords" content="Ibnul Tahsin, Web Developer, Frontend Developer, MERN Stack, Portfolio">
+    <meta name="google-site-verification" content="l5yfy-CiCTvJ2RVgoyMfpVNt_XDtm-TUN5gkLI9jAiU" />
+    
+    <title>Tahsin | Frontend Developer &amp; UI Specialist</title>
+    <meta name="description" content="Portfolio of Ibnul Tahsin Rihan – Frontend Designer &amp; Developer at Fazesoft, Computer Science student, and MERN stack specialist based in Bangladesh. Explore responsive web projects and clean UI implementations.">
+    <meta name="keywords" content="Ibnul Tahsin Rihan, Ibnul Tahsin, Frontend Developer, Frontend Designer, Fazesoft, Web Developer Bangladesh, MERN Stack, UI UX, Responsive Web Design, Portfolio">
     <meta name="author" content="Ibnul Tahsin Rihan">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Ibnul Tahsin Rihan - Frontend Developer">
-    <meta property="og:description" content="Computer Science Student & Aspiring MERN Stack Developer">
+    <link rel="canonical" href="https://ibnultahsinrihan.vercel.app/">
+
+    <!-- Theme Initialization: Always initially in Dark Mode -->
+    <script>
+        (function() {
+            try {
+                localStorage.removeItem('portfolio-theme');
+                localStorage.removeItem('portfolio_theme_mode');
+            } catch (e) {}
+            document.documentElement.setAttribute('data-theme', 'dark');
+        })();
+    </script>
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    
-    <title>Ibnul Tahsin Rihan | Frontend Developer</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    
+    <meta property="og:url" content="https://ibnultahsinrihan.vercel.app/">
+    <meta property="og:title" content="Tahsin | Frontend Developer &amp; UI Specialist">
+    <meta property="og:description" content="Frontend Designer &amp; Developer at Fazesoft. Building pixel-perfect, responsive web interfaces and modern web applications.">
+    <meta property="og:image" content="https://ibnultahsinrihan.vercel.app/asset/portfolio.jpeg">
+    <meta property="og:site_name" content="Ibnul Tahsin Rihan Portfolio">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ibnultahsinrihan.vercel.app/">
+    <meta name="twitter:title" content="Tahsin | Frontend Developer &amp; UI Specialist">
+    <meta name="twitter:description" content="Frontend Designer &amp; Developer at Fazesoft. Building pixel-perfect, responsive web interfaces and modern web applications.">
+    <meta name="twitter:image" content="https://ibnultahsinrihan.vercel.app/asset/portfolio.jpeg">
+
+    <!-- Favicon: Modern T Monogram -->
+    <link rel="icon" type="image/svg+xml" href="asset/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="asset/favicon.png">
+    <link rel="apple-touch-icon" href="asset/favicon.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ibnul Tahsin Rihan",
+      "alternateName": "Ibnul Tahsin",
+      "url": "https://ibnultahsinrihan.vercel.app/",
+      "image": "https://ibnultahsinrihan.vercel.app/asset/portfolio.jpeg",
+      "jobTitle": "Frontend Designer & Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Fazesoft",
+        "url": "https://www.fazesoft.com/"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "United International University"
+      },
+      "sameAs": [
+        "https://github.com/tahsinX",
+        "https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/"
+      ],
+      "knowsAbout": [
+        "Frontend Web Development",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Responsive Web Design",
+        "UI Implementation",
+        "React.js",
+        "MERN Stack"
+      ]
+    }
+    </script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="#home" class="logo">
-                    <span class="logo-text">Tahsin</span>
-                </a>
-                
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <span class="hamburger"></span>
-                </button>
-                
-                <ul class="nav-menu" id="navMenu">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo" aria-label="Ibnul Tahsin homepage">
+                <span class="logo-text">Tahsin</span><span class="accent-dot">.</span>
+            </a>
+
+            <!-- Desktop & Mobile Navigation Links -->
+            <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+                <ul class="nav-list">
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#education" class="nav-link">Education</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle Button (Pill Switch) -->
+                <button class="theme-toggle-pill" id="themeToggle" type="button" aria-label="Switch between dark and light mode" role="switch" aria-checked="true">
+                    <span class="theme-toggle-track">
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                            <i class="fas fa-sun"></i>
+                        </span>
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                            <i class="fas fa-moon"></i>
+                        </span>
+                        <span class="theme-toggle-thumb" aria-hidden="true"></span>
+                    </span>
+                </button>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
+    <!-- Mobile Navigation Overlay -->
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero section" id="home">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="eyebrow-badge">
+                        <span class="status-indicator"></span>
+                        <span>Available for Opportunities</span>
+                    </div>
+                    
                     <p class="hero-greeting">Hello, I'm</p>
                     <h1 class="hero-title">Ibnul Tahsin<span class="accent-dot">.</span></h1>
-                    <h2 class="hero-subtitle">Frontend Web Developer</h2>
-                    <p class="hero-description">
-                        Computer Science & Engineering student specializing in converting UI designs 
-                        into responsive, pixel-perfect web interfaces. Currently advancing toward 
-                        becoming a MERN stack developer.
-                    </p>
+                    <h2 class="hero-subtitle">Frontend Web Developer &amp; UI Specialist</h2>
                     
+                    <p class="hero-description">
+                        Computer Science &amp; Engineering student specializing in converting complex UI designs into responsive, pixel-perfect, and high-performance web interfaces. Currently engineering frontends at <strong>Fazesoft</strong> and advancing toward full-stack <strong>MERN</strong> development.
+                    </p>
+
                     <div class="hero-cta">
                         <a href="#projects" class="btn btn-primary">
-                            View My Work
-                            <i class="fas fa-arrow-right"></i>
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                         <a href="#contact" class="btn btn-secondary">
-                            Get In Touch
+                            <span>Get In Touch</span>
                         </a>
                     </div>
-                    
-                    <div class="social-links">
-                        <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer" 
-                           class="social-link" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" 
-                           target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:ibnultahsinrihan@gmail.com" class="social-link" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-image">
-                    <div class="image-wrapper">
-                        <img src="asset/the_photo.jpg" alt="Ibnul Tahsin Rihan">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="scroll-indicator">
-            <a href="#about" aria-label="Scroll to about section">
-                <span class="scroll-line"></span>
-            </a>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <span class="section-label">Get To Know</span>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-lead">
-                        I am a <strong>Computer Science and Engineering student</strong> at United International 
-                        University with a strong passion for web development and creating meaningful digital experiences.
-                    </p>
-                    
-                    <p>
-                        My current focus is on <strong>frontend development</strong>, where I specialize in converting 
-                        UI designs into responsive and functional web interfaces. I take pride in building layouts that 
-                        are not only visually accurate but also maintainable and scalable.
-                    </p>
-                    
-                    <p>
-                        I am actively working toward becoming a <strong>MERN stack web developer</strong> and 
-                        continuously improving my technical skills through practice-based projects. My approach 
-                        combines attention to detail with a commitment to writing clean, semantic code.
-                    </p>
-                    
-                    <div class="about-highlights">
-                        <div class="highlight-card">
-                            <i class="fas fa-code"></i>
-                            <h3>Clean Code</h3>
-                            <p>Writing semantic, maintainable HTML, CSS & JavaScript</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-mobile-alt"></i>
-                            <h3>Responsive Design</h3>
-                            <p>Mobile-first approach ensuring perfect display on all devices</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-layer-group"></i>
-                            <h3>UI Implementation</h3>
-                            <p>Converting Figma designs into pixel-perfect web pages</p>
-                        </div>
+                    <div class="social-links" aria-label="Social Profiles">
+                        <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub Profile">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="mailto:ibnultahsinrihan@gmail.com" class="social-btn" aria-label="Email Ibnul Tahsin">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Skills & Technologies</h2>
-                <span class="section-label">What I Know</span>
-            </div>
-            
-            <div class="skills-grid">
-                <!-- Frontend Development -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Frontend Development</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-badge">HTML5</span>
-                        <span class="skill-badge">CSS3</span>
-                        <span class="skill-badge">JavaScript</span>
-                        <span class="skill-badge">Responsive Design</span>
-                    </div>
-                </div>
-                
-                <!-- Tools & Workflow -->
-                <div class="skill-category">
-                    <div class="category-header">
-                        <i class="fas fa-tools"></i>
-                        <h3>Tools & Workflow</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-badge">Git & GitHub</span>
-                        <span class="skill-badge">VS Code</span>
-                        <span class="skill-badge">Figma</span>
-                        <span class="skill-badge">UI Implementation</span>
-                    </div>
-                </div>
-                
-                <!-- Currently Learning -->
-                <div class="skill-category learning">
-                    <div class="category-header">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Currently Learning</h3>
-                    </div>
-                    <div class="learning-tags">
-                        <span class="learning-tag">
-                            <i class="fab fa-react"></i>
-                            React.js
-                        </span>
-                        <span class="learning-tag">
-                            <i class="fab fa-node"></i>
-                            Node.js
-                        </span>
-                        <span class="learning-tag">
-                            <i class="fas fa-database"></i>
-                            MongoDB
-                        </span>
-                        <span class="learning-tag">
-                            <i class="fas fa-server"></i>
-                            Express.js
-                        </span>
-                        <span class="learning-tag">
-                            <i class="fas fa-layer-group"></i>
-                            MERN Stack
-                        </span>
+                <div class="hero-visual">
+                    <div class="avatar-frame">
+                        <div class="avatar-halo" aria-hidden="true"></div>
+                        <div class="avatar-inner">
+                            <img src="asset/portfolio.jpeg" alt="Ibnul Tahsin Rihan - Frontend Developer" width="420" height="420" loading="eager" class="avatar-img">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <span class="section-label">My Work</span>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="asset/kids_education.png" alt="Kids Education Website">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://tahsinx.github.io/kids-education/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="https://github.com/tahsinX/kids-education" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Kids Education Website</h3>
-                        <p class="project-description">
-                            An engaging educational website designed for children with colorful UI elements 
-                            and interactive features. Fully responsive design with emphasis on accessibility and user-friendly navigation.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Responsive</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <!-- Project 2 -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="asset/browse_for_pet.png" alt="Browse4Pets Website">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://tahsinx.github.io/Browse4Pets-A3-/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="https://github.com/tahsinX/Browse4Pets-A3-" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Browse4Pets</h3>
-                        <p class="project-description">
-                            A pet adoption platform featuring intuitive browsing experience and detailed pet profiles. 
-                            Implemented with clean layout design, interactive elements, and mobile-responsive interface.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Flexbox</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <!-- Project 3 -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="asset/bangladesh.png" alt="Bangladesh 2.0 Website">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://tahsinx.github.io/Bangladesh-2.0/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="https://github.com/tahsinX/Bangladesh-2.0" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Bangladesh 2.0</h3>
-                        <p class="project-description">
-                            A comprehensive website showcasing Bangladesh's culture, heritage, and modern development. 
-                            Features multi-page architecture with CSS Grid layouts, semantic HTML structure, and responsive design.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS Grid</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Mobile-First</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            
-            <div class="projects-cta">
-                <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                    <i class="fab fa-github"></i>
-                    View All Projects on GitHub
+            <div class="scroll-indicator" aria-hidden="true">
+                <a href="#about" aria-label="Scroll to about section">
+                    <span class="scroll-arrow"></span>
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Education Section -->
-    <section class="education" id="education">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Education & Activities</h2>
-                <span class="section-label">Academic Background</span>
-            </div>
-            
-            <div class="education-content">
-                <!-- Education Timeline -->
-                <div class="education-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">Ongoing</span>
-                            <h3 class="timeline-title">BSc in Computer Science & Engineering</h3>
-                            <p class="timeline-institution">United International University</p>
-                            <p class="timeline-description">
-                                Pursuing comprehensive education in computer science fundamentals, 
-                                software engineering, and web technologies.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-marker">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2021</span>
-                            <h3 class="timeline-title">Higher Secondary Certificate (HSC)</h3>
-                            <p class="timeline-institution">Ideal College</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-marker">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2019</span>
-                            <h3 class="timeline-title">Secondary School Certificate (SSC)</h3>
-                            <p class="timeline-institution">BCSIR High School</p>
-                        </div>
-                    </div>
+        <!-- About Section -->
+        <section class="about section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Get To Know</span>
+                    <h2 class="section-title">About Me</h2>
                 </div>
-                
-                <!-- Extracurricular -->
-                <div class="extracurricular">
-                    <h3 class="subsection-title">Extracurricular Activities</h3>
-                    <div class="activities-grid">
-                        <div class="activity-card">
-                            <div class="activity-icon">
-                                <i class="fas fa-users"></i>
+
+                <div class="about-grid">
+                    <div class="about-bio card-surface">
+                        <p class="about-lead">
+                            I am a <strong>Computer Science and Engineering student</strong> at United International University with a passion for web engineering, interactive systems, and crafting responsive digital interfaces.
+                        </p>
+                        <p>
+                            My primary focus is <strong>frontend design and development</strong>, specializing in translating complex Figma wireframes into clean, accessible, and scalable web architectures. I combine rigorous attention to visual hierarchy with modern coding standards.
+                        </p>
+                        <p>
+                            Currently applying and expanding these principles in industry as a contract developer at <strong>Fazesoft</strong>, while actively deepening proficiency across the <strong>MERN stack</strong> (React, Node.js, Express, MongoDB) through real-world software projects.
+                        </p>
+                    </div>
+
+                    <div class="about-features">
+                        <div class="feature-card card-surface">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-code feature-icon" aria-hidden="true"></i>
                             </div>
-                            <h4>UIU Computer Club</h4>
-                            <p class="activity-role">General Member</p>
-                            <p class="activity-description">
-                                Active participation in tech workshops, programming competitions, 
-                                and knowledge-sharing sessions.
-                            </p>
+                            <div class="feature-body">
+                                <h3>Clean Code</h3>
+                                <p>Writing semantic, modular, and maintainable HTML5, modern CSS3, and JavaScript adhering to strict web standards.</p>
+                            </div>
                         </div>
-                        
-                        <div class="activity-card">
-                            <div class="activity-icon">
-                                <i class="fas fa-hands-helping"></i>
+
+                        <div class="feature-card card-surface">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-mobile-screen-button feature-icon" aria-hidden="true"></i>
                             </div>
-                            <h4>As-Sunnah Foundation</h4>
-                            <p class="activity-role">Volunteer</p>
-                            <p class="activity-description">
-                                Contributing to community service initiatives and social welfare programs.
-                            </p>
+                            <div class="feature-body">
+                                <h3>Responsive Design</h3>
+                                <p>Mobile-first fluid layouts that deliver consistent visual appeal and intuitive ergonomics across every screen size.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card card-surface">
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-layer-group feature-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-body">
+                                <h3>UI Implementation</h3>
+                                <p>Translating Figma design systems into pixel-perfect, accessible, and high-performance interactive experiences.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Contact Me</h2>
-                <span class="section-label">Get In Touch</span>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p class="contact-lead">
-                        I'm currently looking for opportunities to apply my skills in real-world projects. 
-                        Whether you have a question, want to discuss a project, or just want to connect, 
-                        feel free to reach out!
-                    </p>
-                    
-                    <div class="contact-cards">
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+        <!-- NEW Experience Section -->
+        <section class="experience section" id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Career &amp; Work History</span>
+                    <h2 class="section-title">Work Experience</h2>
+                </div>
+
+                <div class="experience-timeline">
+                    <!-- Fazesoft Experience Card -->
+                    <article class="experience-card card-surface highlight-card">
+                        <div class="experience-header">
+                            <div class="experience-brand">
+                                <div class="company-logo-chip" title="Fazesoft">
+                                    <img src="asset/fazesoft-logo.png" alt="Fazesoft logo" class="company-logo" height="48" loading="lazy">
+                                </div>
+                                <div class="company-details">
+                                    <div class="company-title-row">
+                                        <h3 class="role-title">Frontend Designer &amp; Developer</h3>
+                                        <span class="badge badge-current">
+                                            <span class="pulse-dot" aria-hidden="true"></span>
+                                            Current
+                                        </span>
+                                    </div>
+                                    <div class="company-meta">
+                                        <a href="https://www.fazesoft.com/" target="_blank" rel="noopener noreferrer" class="company-link">
+                                            <span>Fazesoft</span>
+                                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                        </a>
+                                        <span class="meta-separator">&bull;</span>
+                                        <span class="employment-type">Contract</span>
+                                        <span class="meta-separator">&bull;</span>
+                                        <span class="duration"><i class="far fa-calendar-alt" aria-hidden="true"></i> April 2026 &mdash; Present</span>
+                                    </div>
+                                </div>
                             </div>
-                            <h3>Email</h3>
-                            <a href="mailto:ibnultahsinrihan@gmail.com">ibnultahsinrihan@gmail.com</a>
                         </div>
-                        
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-linkedin"></i>
+
+                        <div class="experience-body">
+                            <ul class="experience-duties">
+                                <li>
+                                    <i class="fas fa-check-circle duty-bullet" aria-hidden="true"></i>
+                                    <span><strong>Engineered responsive &amp; intuitive web interfaces</strong> with modern frontend architectures, guaranteeing seamless cross-browser compatibility and device fluidity.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle duty-bullet" aria-hidden="true"></i>
+                                    <span><strong>Transformed Figma UI/UX wireframes</strong> and interactive prototypes into pixel-perfect, production-grade frontend code with high fidelity to design specifications.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle duty-bullet" aria-hidden="true"></i>
+                                    <span><strong>Collaborated with backend engineers &amp; designers</strong> to integrate scalable application components, streamline APIs, and enhance overall user flows.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle duty-bullet" aria-hidden="true"></i>
+                                    <span><strong>Optimized application performance &amp; load speeds</strong> through efficient asset management, code minification, and structured DOM rendering.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle duty-bullet" aria-hidden="true"></i>
+                                    <span><strong>Authored clean, maintainable, and reusable code</strong> following industry best practices, component modularity, and accessibility standards.</span>
+                                </li>
+                            </ul>
+
+                            <div class="experience-tags">
+                                <span class="pill-tag">HTML5 / CSS3</span>
+                                <span class="pill-tag">JavaScript ES6+</span>
+                                <span class="pill-tag">Responsive UI</span>
+                                <span class="pill-tag">Figma Implementation</span>
+                                <span class="pill-tag">Performance Optimization</span>
                             </div>
-                            <h3>LinkedIn</h3>
-                            <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" 
-                               target="_blank" rel="noopener noreferrer">
-                               Connect on LinkedIn
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">What I Know</span>
+                    <h2 class="section-title">Skills &amp; Technologies</h2>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Frontend Development -->
+                    <div class="skill-group card-surface">
+                        <div class="skill-group-header">
+                            <div class="skill-icon-chip">
+                                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>Frontend Development</h3>
+                                <p class="skill-group-subtitle">Core Client-Side Technologies</p>
+                            </div>
+                        </div>
+                        <div class="skill-pill-list">
+                            <span class="skill-pill"><i class="fab fa-html5" aria-hidden="true"></i> HTML5</span>
+                            <span class="skill-pill"><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS3</span>
+                            <span class="skill-pill"><i class="fab fa-js" aria-hidden="true"></i> JavaScript (ES6+)</span>
+                            <span class="skill-pill"><i class="fas fa-mobile-alt" aria-hidden="true"></i> Responsive Design</span>
+                            <span class="skill-pill"><i class="fas fa-table-cells" aria-hidden="true"></i> CSS Grid &amp; Flexbox</span>
+                            <span class="skill-pill"><i class="fas fa-universal-access" aria-hidden="true"></i> Web Accessibility</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Workflow -->
+                    <div class="skill-group card-surface">
+                        <div class="skill-group-header">
+                            <div class="skill-icon-chip">
+                                <i class="fas fa-screwdriver-wrench" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3>Tools &amp; Workflow</h3>
+                                <p class="skill-group-subtitle">Development &amp; Design Tooling</p>
+                            </div>
+                        </div>
+                        <div class="skill-pill-list">
+                            <span class="skill-pill"><i class="fab fa-git-alt" aria-hidden="true"></i> Git &amp; GitHub</span>
+                            <span class="skill-pill"><i class="fas fa-code" aria-hidden="true"></i> VS Code</span>
+                            <span class="skill-pill"><i class="fab fa-figma" aria-hidden="true"></i> Figma</span>
+                            <span class="skill-pill"><i class="fas fa-cubes" aria-hidden="true"></i> UI Implementation</span>
+                            <span class="skill-pill"><i class="fas fa-terminal" aria-hidden="true"></i> Chrome DevTools</span>
+                            <span class="skill-pill"><i class="fas fa-vial" aria-hidden="true"></i> Cross-Browser Testing</span>
+                        </div>
+                    </div>
+
+                    <!-- Currently Learning -->
+                    <div class="skill-group card-surface skill-group-learning">
+                        <div class="skill-group-header">
+                            <div class="skill-icon-chip accent-chip">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="learning-badge-row">
+                                    <h3>Currently Learning</h3>
+                                    <span class="badge badge-accent">In Progress</span>
+                                </div>
+                                <p class="skill-group-subtitle">Advancing toward Full-Stack Architecture</p>
+                            </div>
+                        </div>
+                        <div class="skill-pill-list">
+                            <span class="skill-pill learning-pill"><i class="fab fa-react" aria-hidden="true"></i> React.js</span>
+                            <span class="skill-pill learning-pill"><i class="fab fa-node-js" aria-hidden="true"></i> Node.js</span>
+                            <span class="skill-pill learning-pill"><i class="fas fa-database" aria-hidden="true"></i> MongoDB</span>
+                            <span class="skill-pill learning-pill"><i class="fas fa-server" aria-hidden="true"></i> Express.js</span>
+                            <span class="skill-pill learning-pill"><i class="fas fa-layer-group" aria-hidden="true"></i> MERN Stack Architecture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section class="projects section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">My Work</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Kids Education -->
+                    <article class="project-card card-surface">
+                        <div class="project-media">
+                            <img src="asset/kids_education.png" alt="Kids Education Website preview" class="project-img" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="https://tahsinx.github.io/kids-education/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="View live demo for Kids Education Website">
+                                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                        <span>Live Demo</span>
+                                    </a>
+                                    <a href="https://github.com/tahsinX/kids-education" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="View source code for Kids Education Website on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <span>Source</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">Kids Education Website</h3>
+                            <p class="project-description">
+                                An engaging educational web portal designed for young learners, incorporating vibrant UI components, intuitive navigation, responsive typography, and playful interactive elements.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-pill">HTML5</span>
+                                <span class="tech-pill">CSS3</span>
+                                <span class="tech-pill">JavaScript</span>
+                                <span class="tech-pill">Responsive</span>
+                            </div>
+                            <div class="project-card-footer">
+                                <a href="https://tahsinx.github.io/kids-education/" target="_blank" rel="noopener noreferrer" class="text-link">
+                                    <span>Visit Site</span>
+                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://github.com/tahsinX/kids-education" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Repository">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Browse4Pets -->
+                    <article class="project-card card-surface">
+                        <div class="project-media">
+                            <img src="asset/browse_for_pet.png" alt="Browse4Pets Website preview" class="project-img" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="https://tahsinx.github.io/Browse4Pets-A3-/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="View live demo for Browse4Pets Website">
+                                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                        <span>Live Demo</span>
+                                    </a>
+                                    <a href="https://github.com/tahsinX/Browse4Pets-A3-" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="View source code for Browse4Pets on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <span>Source</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">Browse4Pets</h3>
+                            <p class="project-description">
+                                A modern pet adoption portal engineered with responsive pet category galleries, comprehensive profile listings, ergonomic navigation filters, and clean mobile-first flexbox layouts.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-pill">HTML5</span>
+                                <span class="tech-pill">CSS3</span>
+                                <span class="tech-pill">JavaScript</span>
+                                <span class="tech-pill">Flexbox</span>
+                            </div>
+                            <div class="project-card-footer">
+                                <a href="https://tahsinx.github.io/Browse4Pets-A3-/" target="_blank" rel="noopener noreferrer" class="text-link">
+                                    <span>Visit Site</span>
+                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://github.com/tahsinX/Browse4Pets-A3-" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Repository">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Bangladesh 2.0 -->
+                    <article class="project-card card-surface">
+                        <div class="project-media">
+                            <img src="asset/bangladesh.png" alt="Bangladesh 2.0 Website preview" class="project-img" loading="lazy">
+                            <div class="project-overlay">
+                                <div class="overlay-buttons">
+                                    <a href="https://tahsinx.github.io/Bangladesh-2.0/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="View live demo for Bangladesh 2.0 Website">
+                                        <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                                        <span>Live Demo</span>
+                                    </a>
+                                    <a href="https://github.com/tahsinX/Bangladesh-2.0" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="View source code for Bangladesh 2.0 on GitHub">
+                                        <i class="fab fa-github" aria-hidden="true"></i>
+                                        <span>Source</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">Bangladesh 2.0</h3>
+                            <p class="project-description">
+                                A culture and national development portal structured with multi-page semantic architecture, CSS Grid card systems, responsive viewports, and modern visual styling.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-pill">HTML5</span>
+                                <span class="tech-pill">CSS Grid</span>
+                                <span class="tech-pill">JavaScript</span>
+                                <span class="tech-pill">Mobile-First</span>
+                            </div>
+                            <div class="project-card-footer">
+                                <a href="https://tahsinx.github.io/Bangladesh-2.0/" target="_blank" rel="noopener noreferrer" class="text-link">
+                                    <span>Visit Site</span>
+                                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://github.com/tahsinX/Bangladesh-2.0" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Repository">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="projects-cta-box">
+                    <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <span>Explore All Repositories on GitHub</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Activities Section -->
+        <section class="education section" id="education">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Academic Background</span>
+                    <h2 class="section-title">Education &amp; Activities</h2>
+                </div>
+
+                <div class="education-grid">
+                    <!-- Academic Timeline -->
+                    <div class="education-timeline-wrapper">
+                        <h3 class="subsection-title">Formal Education</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-entry">
+                                <div class="timeline-node">
+                                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                </div>
+                                <div class="timeline-card card-surface">
+                                    <span class="timeline-date-chip">Ongoing</span>
+                                    <h4 class="timeline-title">BSc in Computer Science &amp; Engineering</h4>
+                                    <p class="timeline-org">United International University</p>
+                                    <p class="timeline-desc">
+                                        Focusing on core algorithms, object-oriented design, database management systems, and modern web application development.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-entry">
+                                <div class="timeline-node">
+                                    <i class="fas fa-building-columns" aria-hidden="true"></i>
+                                </div>
+                                <div class="timeline-card card-surface">
+                                    <span class="timeline-date-chip">2021</span>
+                                    <h4 class="timeline-title">Higher Secondary Certificate (HSC)</h4>
+                                    <p class="timeline-org">Ideal College</p>
+                                    <p class="timeline-desc">Science stream focusing on advanced mathematics, physics, and chemistry fundamentals.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-entry">
+                                <div class="timeline-node">
+                                    <i class="fas fa-school" aria-hidden="true"></i>
+                                </div>
+                                <div class="timeline-card card-surface">
+                                    <span class="timeline-date-chip">2019</span>
+                                    <h4 class="timeline-title">Secondary School Certificate (SSC)</h4>
+                                    <p class="timeline-org">BCSIR High School</p>
+                                    <p class="timeline-desc">Science curriculum building analytical, mathematical, and computer science foundations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extracurricular Activities -->
+                    <div class="activities-wrapper">
+                        <h3 class="subsection-title">Extracurricular Leadership &amp; Community</h3>
+                        <div class="activities-list">
+                            <div class="activity-card card-surface">
+                                <div class="activity-icon-chip">
+                                    <i class="fas fa-users-gear" aria-hidden="true"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4 class="activity-title">UIU Computer Club</h4>
+                                    <span class="activity-role">General Member</span>
+                                    <p class="activity-desc">
+                                        Actively participating in developer tech summits, competitive programming workshops, and peer knowledge-sharing sessions.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="activity-card card-surface">
+                                <div class="activity-icon-chip">
+                                    <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4 class="activity-title">As-Sunnah Foundation</h4>
+                                    <span class="activity-role">Volunteer</span>
+                                    <p class="activity-desc">
+                                        Contributing time and organizational support to humanitarian initiatives, disaster relief efforts, and nationwide community development.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">Get In Touch</span>
+                    <h2 class="section-title">Let's Connect</h2>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info-panel">
+                        <p class="contact-intro">
+                            I am actively seeking contract, freelance, and engineering opportunities where I can apply my frontend design and web development capabilities. Let's discuss your project or explore mutual opportunities!
+                        </p>
+
+                        <div class="contact-channels">
+                            <a href="mailto:ibnultahsinrihan@gmail.com" class="contact-channel-card card-surface">
+                                <div class="contact-icon-box">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-channel-text">
+                                    <span class="channel-label">Email</span>
+                                    <span class="channel-value">ibnultahsinrihan@gmail.com</span>
+                                </div>
+                                <i class="fas fa-arrow-up-right-from-square channel-action-icon" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" target="_blank" rel="noopener noreferrer" class="contact-channel-card card-surface">
+                                <div class="contact-icon-box">
+                                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-channel-text">
+                                    <span class="channel-label">LinkedIn</span>
+                                    <span class="channel-value">linkedin.com/in/ibnul-tahsin-rihan</span>
+                                </div>
+                                <i class="fas fa-arrow-up-right-from-square channel-action-icon" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer" class="contact-channel-card card-surface">
+                                <div class="contact-icon-box">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-channel-text">
+                                    <span class="channel-label">GitHub</span>
+                                    <span class="channel-value">github.com/tahsinX</span>
+                                </div>
+                                <i class="fas fa-arrow-up-right-from-square channel-action-icon" aria-hidden="true"></i>
                             </a>
                         </div>
-                        
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-github"></i>
+                    </div>
+
+                    <div class="contact-form-panel card-surface">
+                        <h3 class="form-title">Send a Message</h3>
+                        <p class="form-subtitle">Have a question or proposal? Drop me a line below.</p>
+
+                        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xgooryqg" method="POST" novalidate>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon" aria-hidden="true"></i>
+                                    <input type="text" id="name" name="name" class="form-control" required placeholder="e.g. Jane Doe" autocomplete="name">
+                                </div>
+                                <span class="field-error" id="nameError" aria-live="polite"></span>
                             </div>
-                            <h3>GitHub</h3>
-                            <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer">
-                                github.com/tahsinX
-                            </a>
-                        </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Your Email <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
+                                    <input type="email" id="email" name="email" class="form-control" required placeholder="e.g. jane@example.com" autocomplete="email">
+                                </div>
+                                <span class="field-error" id="emailError" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject <span class="required-star">*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-tag input-icon" aria-hidden="true"></i>
+                                    <input type="text" id="subject" name="subject" class="form-control" required placeholder="e.g. Project Opportunity / Collaboration">
+                                </div>
+                                <span class="field-error" id="subjectError" aria-live="polite"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Your Message <span class="required-star">*</span></label>
+                                <div class="input-wrapper input-wrapper-textarea">
+                                    <i class="fas fa-message input-icon textarea-icon" aria-hidden="true"></i>
+                                    <textarea id="message" name="message" class="form-control form-textarea" rows="5" required placeholder="Tell me about your project or inquiry..."></textarea>
+                                </div>
+                                <span class="field-error" id="messageError" aria-live="polite"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                                <span class="btn-text">Send Message</span>
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+
+                            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+                        </form>
                     </div>
                 </div>
-                
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xgooryqg" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" required placeholder="john@example.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required placeholder="How can I help you?">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required 
-                                      placeholder="Write your message here..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
-                    
-                    <div class="form-status" id="formStatus"></div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <div class="footer-brand">
-                        <a href="#home" class="footer-logo">Ibnul Tahsin</a>
-                        <p class="footer-tagline">Frontend Developer | MERN Stack Enthusiast</p>
-                    </div>
-                    
-                    <div class="footer-links">
-                        <div class="footer-column">
-                            <h4>Quick Links</h4>
-                            <ul>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#skills">Skills</a></li>
-                                <li><a href="#projects">Projects</a></li>
-                                <li><a href="#education">Education</a></li>
-                            </ul>
-                        </div>
-                        
-                        <div class="footer-column">
-                            <h4>Connect</h4>
-                            <ul>
-                                <li>
-                                    <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-github"></i> GitHub
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" 
-                                       target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-linkedin"></i> LinkedIn
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:ibnultahsinrihan@gmail.com">
-                                        <i class="fas fa-envelope"></i> Email
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo">
+                        <span>Tahsin</span><span class="accent-dot">.</span>
+                    </a>
+                    <p class="footer-tagline">
+                        Frontend Designer &amp; Developer &bull; Building accessible, responsive, and performance-driven web products.
+                    </p>
                 </div>
-                
-                <div class="footer-bottom">
-                    <p>&copy; 2026 Ibnul Tahsin Rihan. All rights reserved.</p>
-                    <p class="footer-note">Built with HTML, CSS & JavaScript</p>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
                 </div>
+
+                <div class="footer-nav-col">
+                    <h4 class="footer-heading">Social &amp; Connect</h4>
+                    <ul class="footer-links-list">
+                        <li>
+                            <a href="https://github.com/tahsinX" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/ibnul-tahsin-rihan-875b45256/" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:ibnultahsinrihan@gmail.com">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>Email Me</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ibnul Tahsin Rihan. All rights reserved.</p>
+               
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top of page">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Custom JavaScript -->
+    <!-- Main JavaScript Application -->
     <script src="js/main.js"></script>
 </body>
 </html>

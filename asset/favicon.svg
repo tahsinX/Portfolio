@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="tGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffc363" />
+      <stop offset="100%" stop-color="#f2a93e" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#f2a93e" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Squircle Background -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#141414" stroke="#2a2a2a" stroke-width="2" />
+  
+  <!-- Stylish Monogram T -->
+  <g filter="url(#glow)">
+    <!-- Top crossbar with modern beveled end -->
+    <path d="M 16 18 C 16 16.5 17 16 18.5 16 L 45.5 16 C 47 16 48 16.5 48 18 C 48 19.5 47 20 45.5 20 L 35 20 L 35 46 C 35 47.5 34.5 48 32 48 C 29.5 48 29 47.5 29 46 L 29 20 L 18.5 20 C 17 20 16 19.5 16 18 Z" fill="url(#tGrad)" />
+    <!-- Modern accent dot -->
+    <circle cx="49" cy="46" r="3" fill="#f2a93e" />
+  </g>
+</svg>
