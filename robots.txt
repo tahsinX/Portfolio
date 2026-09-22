@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /asset/
+Allow: /css/
+Allow: /js/
 
 Sitemap: https://ibnultahsinrihan.vercel.app/sitemap.xml
+Host: https://ibnultahsinrihan.vercel.app
