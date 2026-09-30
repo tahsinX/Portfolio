@@ -1106,22 +1106,70 @@ ul {
 
 .project-media {
     position: relative;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background-color: var(--bg-elevated);
     border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tailored media backgrounds to seamlessly blend screenshots without letterbox artifacts */
+.project-media.bg-rivertyne {
+    background-color: #162444;
+}
+
+.project-media.bg-homenet {
+    background-color: #0c1a17;
+}
+
+.project-media.bg-white {
+    background-color: #ffffff;
+}
+
+.project-media.bg-bangladesh {
+    background-color: #c5dfd4;
+}
+
+.project-featured-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.625rem;
+    background: rgba(20, 20, 20, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+[data-theme="light"] .project-featured-badge {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .project-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.4s ease;
+    display: block;
 }
 
 .project-card:hover .project-img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .project-overlay {
@@ -1224,6 +1272,34 @@ ul {
     background-color: var(--accent);
     color: var(--on-accent);
     border-color: var(--accent);
+}
+
+.private-repo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-pill);
+    user-select: none;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    line-height: 1.2;
+    transition: border-color var(--anim-fast), color var(--anim-fast);
+}
+
+.private-repo-badge i {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+}
+
+.private-repo-badge:hover {
+    color: var(--text-secondary);
+    border-color: var(--border-hover);
 }
 
 .projects-cta-box {
